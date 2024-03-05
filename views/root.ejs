@@ -1,0 +1,13 @@
+<%- include("partials/header") -%>
+
+<form action="/connectUser" method="post">
+<div class="container">
+        <h1 class="heading">Tunnel Manager</h1>
+        <input type="text" name="name" id="name" placeholder="Enter username">
+        <input type="password" name="password" id="pwd" placeholder="Enter password">
+        <input type="text" name="address" id="addr" placeholder="Enter network address">
+        <button type="submit">Connect to Network</button>
+    </div>
+</form>
+
+<%- include("partials/footer") -%>

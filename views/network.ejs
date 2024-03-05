@@ -1,0 +1,16 @@
+<%- include("partials/header") -%>
+
+<div class="container">
+    <h2>Port info:</h2>
+        <pre>
+                <p><%= message %></p>
+        </pre>
+            <form action="/tunnel", method="post">
+                <input type="text" name="lport" id="lport" placeholder="Enter Local Port">
+                <input type="text" name="rport" id="rport" placeholder="Enter Remote Port">
+                <button type="submit">Create Tunnel</button>
+            </form>
+        </div>
+</div>
+
+<%- include("partials/footer") -%>
