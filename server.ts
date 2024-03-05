@@ -23,6 +23,7 @@ app.get("/", (_, res) => {
 });
 
 let message: string = "";
+let link: string = "";
 app.post("/connectUser", (req, res) => {
 	const { name, password, address } = req.body;
 	if (name != user.name || password != user.password) {
@@ -40,8 +41,8 @@ app.post("/tunnel", (req, res) => {
 	console.log("tunneling to port: ", { lport, rport });
 	io.emit("open-tunnel", { lport, rport });
 	setTimeout(() => {
-		console.log("redirecting to: ", message);
-		return res.redirect(`http://${message}`);
+		console.log("redirecting to: ", link);
+		return res.redirect(`http://${link}`);
 	}, 1000);
 });
 
@@ -49,9 +50,10 @@ io.on("connection", socket => {
 	console.log("a user connected with id: ", socket.id);
 	socket.on("message", msg => {
 		console.log("message: " + msg);
-	});
-	socket.on("message", msg => {
 		message = msg;
+	});
+	socket.on("tunnel-link", lnk => {
+		link = lnk;
 	});
 });
 
