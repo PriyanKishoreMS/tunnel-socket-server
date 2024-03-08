@@ -22,8 +22,15 @@ app.get("/", (_, res) => {
 	res.render("root");
 });
 
+interface linkData {
+	link: string;
+	lport: string;
+	rport: string;
+}
+
 let message: string = "";
-let link: string = "";
+let link: linkData = { link: "", lport: "", rport: "" };
+const tunnels: linkData[] = [];
 app.post("/connectUser", (req, res) => {
 	const { name, password, address } = req.body;
 	if (name != user.name || password != user.password) {
@@ -42,7 +49,24 @@ app.post("/tunnel", (req, res) => {
 	io.emit("open-tunnel", { lport, rport });
 	setTimeout(() => {
 		console.log("redirecting to: ", link);
-		return res.redirect(`http://${link}`);
+		console.log(tunnels);
+		if (tunnels.findIndex(t => t.link === link.link) === -1) {
+			tunnels.push(link);
+		}
+		res.render("tunnel", { tunnels });
+	}, 1000);
+});
+
+app.post("/kill-tunnel", (req, res) => {
+	const tunnel = JSON.parse(req.body.tunnel);
+	console.log("killing tunnel: ", tunnel);
+	io.emit("kill-tunnel", tunnel);
+	setTimeout(() => {
+		tunnels.splice(
+			tunnels.findIndex(t => t.link === tunnel.link),
+			1
+		);
+		res.render("tunnel", { tunnels });
 	}, 1000);
 });
 
