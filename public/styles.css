@@ -39,4 +39,34 @@ input {
 	align-items: center;
 	justify-content: space-between;
 	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.title {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.description {
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+
+.tunnel-list {
+	list-style: none;
+	padding: 0;
+}
+
+.kill-button {
+	background-color: #dc3545;
+	color: #fff;
+	border: none;
+	padding: 5px 10px;
+	cursor: pointer;
+	border-radius: 5px;
+	width: 60px;
+}
+
+.kill-button:hover {
+	background-color: #c82333;
 }

@@ -3,20 +3,24 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>Tunnel</h1>
-      <p>Here is the tunnel</p>
-      <!-- for loop inside tunnels and display -->
-        <ul>
-            <% for (var i = 0; i < tunnels.length; i++) { %>
-                <li class="row"><a href="http://<%= tunnels[i].link %>"target="_blank" rel="noopener noreferrer"><%= tunnels[i].link%></a> 
-                  <form action="/kill-tunnel" method="post">
-                    <input type="hidden" name="tunnel" value='<%= JSON.stringify(tunnels[i]) %>'>
-                    <button type="submit">Kill</button>
-                  </form>
-                </li>
-            <% } %>
-        </ul>
+      <h1 class="title">Distributed Tunnel Manager</h1>
+      <p class="description">
+        This is a list of all the tunnels that are currently running.<br> 
+        You can kill any of these tunnels by clicking the "Kill" button.
+      </p>
+      <ul class="tunnel-list">
+        <% for (var i = 0; i < tunnels.length; i++) { %>
+          <li class="row">
+            <a href="http://<%= tunnels[i].link %>" target="_blank" rel="noopener noreferrer"><%= tunnels[i].link%></a> 
+            <form action="/kill-tunnel" method="post">
+              <input type="hidden" name="tunnel" value='<%= JSON.stringify(tunnels[i]) %>'>
+              <button type="submit" class="kill-button">Kill</button>
+            </form>
+          </li>
+        <% } %>
+      </ul>
     </div>
   </div>
+</div>
 
 <%- include("partials/footer") -%>
